@@ -1,0 +1,40 @@
+{
+  "port": 1337,
+  "security": {
+    "tokenLife" : 3600
+  },
+  "mongoose": {
+    "uri": "mongodb://localhost/shortenerDB"
+  },
+  "session" : {
+    "secret" : "test_secret",
+    "key" : "sid",
+    "cookie" : {
+      "path" : "/",
+      "httpOnly" : true,
+      "maxAge" : null
+    }
+  },
+  "default": {
+    "api": {
+      "version" : "v1"
+    },
+    "user": {
+      "username": "nik",
+      "password": "bat"
+    },
+    "link": {
+      "fullValue": "http://www.nativelabs.net/solutions/",
+      "shortValue": "nik.bat/qwe123",
+      "description" : "description",
+      "tags" : "tag1",
+      "hopCount" : 7,
+      "userId": "559f8c7db6ee41200d0ab4d3"
+    },
+    "client": {
+      "name": "nik",
+      "clientId": "nik",
+      "clientSecret": "bat"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>Shortener</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="js/controller.js"></script>
+</head>
+<body ng-controller="userListCtrl">
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!--<div class="span2">
+            &lt;!&ndash;Sidebar content&ndash;&gt;
+            Search: <input ng-model="user">
+            <div class="span10">
+                &lt;!&ndash;Body content&ndash;&gt;
+                <ul class="users">
+                    <li ng-repeat="user in users | filter:user ">
+                        {{user.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+        <div class="span10">
+            <form name="myform" id="myform1" ng-submit="save()">
+                <fieldset>
+                    <legend>New User</legend>
+                    <div class="control-group">
+                        <input type="text" placeholder="User" ng-model="username" size=20 required/>
+                        <input type="password" placeholder="Password" ng-model="password" size=20 required/>
+                    </div>
+                </fieldset>
+                <p>
+                <div><button type="submit" >Save now</button></div>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
