@@ -10,9 +10,11 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('loginCtrl', ['$scope', '$http', 'UserService', function ($scope, $http, UserService) {
-    UserService.getUsers().success(function (data, status) {
-        $scope.users = data;
-    });
+views.controller('loginCtrl', ['$scope', '$http', 'TokenService', function ($scope, $http, TokenService) {
+    $scope.getToken = function() {
+        TokenService.getToken().success(function (data, status) {
+            $scope.token = data;
+        });
+    };
 }]);
 

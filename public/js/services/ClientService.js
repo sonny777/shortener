@@ -21,19 +21,7 @@ services.factory('ClientService', ['$http', function($http) {
                 url: '/api/clients/post',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            }).
-                success(handleSuccess).
-                error(handleError('Error creating user'));
+            })
         }
     }
 }]);
-
-function handleSuccess(data) {
-    return data;
-}
-
-function handleError(error) {
-    return function () {
-        return { success: false, message: error };
-    };
-}

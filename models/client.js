@@ -1,6 +1,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
+//TODO:
+    // удалить поле clientId оно должно совпадать с id
     Client = new Schema({
         name: {
             type: String,
