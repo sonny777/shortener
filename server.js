@@ -8,7 +8,7 @@ var methodOverride      = require('method-override');
 require('./utils/auth/oauth'); // Важно!
 var config              = require('./configs/index');
 var oauth2              = require('./utils/auth/oauth2');
-var users               = require('./routes/users');
+var usersR               = require('./routes/users');
 var links               = require('./routes/links');
 var clients             = require('./routes/clients');
 var mongoose            = require('./utils/db/mongoose');
@@ -36,7 +36,7 @@ app.use(session({
 app.use(router);
 
 app.use('/api/links', links);
-app.use('/api/users', users);
+app.use('/api/users', usersR);
 app.use('/api/clients', clients);
 app.use('/api/oauth/token', oauth2.token);
 

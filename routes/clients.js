@@ -19,7 +19,7 @@ router.post('/post', function(req, res) {
 
     client.save(function (err) {
         if (!err) {
-            logger.info("New client created with name: %s", client.clientId);
+            logger.info("New client created with name: %s", client.name);
             return res.json({
                 status: 'OK',
                 client: client

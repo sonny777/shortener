@@ -1,48 +1,35 @@
-<!doctype html>
-<html lang="en" ng-app="myApp">
+<!DOCTYPE html>
+<html lang="en" ng-app="sm">
 <head>
     <meta charset="utf-8">
-    <title>Shortener</title>
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-    <script src="js/controller.js"></script>
+    <title>Url Shortener</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body ng-controller="userListCtrl">
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <!--<div class="span2">
-            &lt;!&ndash;Sidebar content&ndash;&gt;
-            Search: <input ng-model="user">
-            <div class="span10">
-                &lt;!&ndash;Body content&ndash;&gt;
-                <ul class="users">
-                    <li ng-repeat="user in users | filter:user ">
-                        {{user.name}}
-                    </li>
-                </ul>
-            </div>
-        </div>-->
-
-       <div class="span10">
-            <form name="myform" id="myform1" ng-submit="save()">
-                <fieldset>
-                    <legend>New User</legend>
-                    <div class="control-group">
-                        <input type="text" placeholder="Name" ng-model="username" size=20 required/>
-                        <input type="password" placeholder="Password" ng-model="password" size=20 required/>
-                        <input type="text" placeholder="Full Url" ng-model="fullValue" size=20 />
-                        <input type="text" placeholder="Short Url" ng-model="shortValue" size=20 />
-                    </div>
-                </fieldset>
-                <p>
-                <div><button type="submit" >Save now</button></div>
-                </p>
-            </form>
-        </div>
-    </div>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a href="#/users">Users</a></li>
+            <li><a href="#/signup">Login</a></li>
+            <li><a href="#/register">Register</a></li>
+        </ul>
+    </nav>
+    <div ui-view></div>
 </div>
+
+<script src="bower_components/angularjs/angular.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="js/views/matches/login.js"></script>
+<script src="js/views/matches/register.js"></script>
+<script src="js/views/matches/users.js"></script>
+<script src="js/views/matches/detailMatch.js"></script>
+<script src="js/services/GameObjectsService.js"></script>
+<script src="js/services/UserService.js"></script>
+<script src="js/services/ClientService.js"></script>
+<script src="js/app.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
