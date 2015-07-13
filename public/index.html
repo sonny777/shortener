@@ -25,13 +25,16 @@
                 </ul>
             </div>
         </div>-->
-        <div class="span10">
+
+       <div class="span10">
             <form name="myform" id="myform1" ng-submit="save()">
                 <fieldset>
                     <legend>New User</legend>
                     <div class="control-group">
-                        <input type="text" placeholder="User" ng-model="username" size=20 required/>
+                        <input type="text" placeholder="Name" ng-model="username" size=20 required/>
                         <input type="password" placeholder="Password" ng-model="password" size=20 required/>
+                        <input type="text" placeholder="Full Url" ng-model="fullValue" size=20 />
+                        <input type="text" placeholder="Short Url" ng-model="shortValue" size=20 />
                     </div>
                 </fieldset>
                 <p>

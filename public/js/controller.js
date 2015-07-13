@@ -48,7 +48,7 @@ function userListCtrl($scope, $http, $templateCache) {
         this.password = '';
 
         var data = JSON.stringify(formData);
-        debugger;
+
         $http({
             method: method,
             url: urlC,
