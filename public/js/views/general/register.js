@@ -5,7 +5,7 @@ var views = angular.module('sm.register', ['ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('register', {
         url: '/register',
-        templateUrl: 'js/views/matches/register.html',
+        templateUrl: 'js/views/general/register.html',
         controller: 'registerCtrl'
     })
 }]);

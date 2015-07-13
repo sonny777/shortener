@@ -5,7 +5,7 @@ var views = angular.module('sm.users', ['ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('users', {
         url: '/users',
-        templateUrl: 'js/views/matches/users.html',
+        templateUrl: 'js/views/general/users.html',
         controller: 'usersCtrl'
     })
 }]);

@@ -5,7 +5,7 @@ var views = angular.module('sm.login', ['ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('login', {
         url: '/login',
-        templateUrl: 'js/views/matches/login.html',
+        templateUrl: 'js/views/general/login.html',
         controller: 'loginCtrl'
     })
 }]);
