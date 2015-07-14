@@ -20,7 +20,8 @@ var mongoose = require('mongoose'),
         },
         hopCount: {
             type: Number,
-            required: false
+            required: false/*,
+            default: 0*/
         },
         userId: {
             type: String,

@@ -1,0 +1,37 @@
+<form name="urlshortener" class="form ng-pristine ng-invalid ng-invalid-required">
+    <div class="row">
+        <div class="hero-unit">
+            <div class="col-sm-6 left-col">
+
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top:5px">
+                        <label>Paste your long URL here:</label>
+                        <input name="longValue" ng-model="vm.link.longValue" type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="longValue" placeholder="Paste your long URL here" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top:5px">
+                        <label>Description:</label>
+                        <textarea name="description" ng-model="vm.link.description" class="form-control ng-pristine ng-invalid ng-invalid-required" rows="3" id="description" placeholder="Description" required></textarea>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-2" style="margin-top:5px">
+                        <button ng-disabled="!urlshortener.$valid" type="submit" class="btn btn-primary" ng-click="createUrl(url)" disabled="disabled">Shorten URL</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 right-col" style="margin-top:5px">
+                <div class="container">
+                    <label>Results:</label>
+                    <ul class="nav">
+                        <!--<li ng-repeat="url in urls">{{url.shortValue}}</li>-->
+                        <li><a ng-repeat="url in urls" ng-href="#" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</a></li>
+                    </ul>
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

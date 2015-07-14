@@ -1,6 +1,6 @@
 'use strict';
 
-var services = angular.module('services', []);
+var services = angular.module('services');
 
 services.factory('TokenService', ['$http', function($http) {
     return {

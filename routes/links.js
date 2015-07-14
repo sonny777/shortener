@@ -4,26 +4,56 @@ var log4js          = require('log4js');
 var logger          = log4js.getLogger();
 var router          = express.Router();
 var Link            = require('../models/link');
+var shortId         = require('../utils/generate/index');
 
 router.get('/', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
-        Link.find(function (err, links) {
-            if (!err) {
-                return res.json(links);
-            } else {
-                res.statusCode = 500;
-                logger.error('Internal error(%d): %s',res.statusCode,err.message);
-                return res.json({
-                    error: 'Server error'
-                });
-            }
-        });
+    Link.find(function (err, links) {
+        if (!err) {
+            return res.json(links);
+        } else {
+            res.statusCode = 500;
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
+            return res.json({
+                error: 'Server error'
+            });
+        }
     });
+});
+
+router.post('/byShortValue', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+
+    Link.findOne({'shortValue': req.body.shortValue}, function (err, link) {
+
+        if(!link) {
+            res.statusCode = 404;
+            logger.error('Not found.');
+            return res.json({
+                error: 'Not found'
+            });
+        }
+
+        if (!err) {
+            logger.info('The method byShortValue completed successfully.');
+            return res.json({
+                status: 'OK',
+                link:link
+            });
+        } else {
+            res.statusCode = 500;
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
+
+            return res.json({
+                error: 'Server error'
+            });
+        }
+    });
+});
 
 router.post('/post', passport.authenticate('bearer', { session: false }), function(req, res) {
 
     var link = new Link({
         fullValue: req.body.fullValue,
-        shortValue: req.body.shortValue,
+        shortValue: 'local.host/' + shortId.generate(),
         description: req.body.description,
         tags: req.body.tags,
         hopCount: req.body.hopCount,

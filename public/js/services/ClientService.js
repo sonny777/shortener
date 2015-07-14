@@ -14,7 +14,6 @@ services.factory('ClientService', ['$http', function($http) {
                 'clientId': username.value,
                 'clientSecret' : password.value
             }
-            debugger;
             var data = JSON.stringify(params);
             return $http({
                 method: 'POST',

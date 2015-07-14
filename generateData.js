@@ -43,7 +43,6 @@ var shortId         = require('./utils/generate/index');
 Link.remove({}, function(err) {
     var link = new Link({
         fullValue: config.get("default:link:fullValue"),
-        //shortValue: config.get("default:link:shortValue"),
         shortValue: 'nik.bat/' + shortId.generate(),
         description: config.get("default:link:description"),
         tags: config.get("default:link:tags"),
