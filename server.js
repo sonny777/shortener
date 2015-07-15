@@ -5,10 +5,11 @@ var cookieParser        = require('cookie-parser');
 var bodyParser          = require('body-parser');
 var passport            = require('passport');
 var methodOverride      = require('method-override');
+var http                = require('http');
 require('./utils/auth/oauth'); // Важно!
 var config              = require('./configs/index');
 var oauth2              = require('./utils/auth/oauth2');
-var usersR               = require('./routes/users');
+var usersR              = require('./routes/users');
 var links               = require('./routes/links');
 var clients             = require('./routes/clients');
 var mongoose            = require('./utils/db/mongoose');
@@ -33,6 +34,7 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
+
 app.use(router);
 
 app.use('/api/links', links);
@@ -40,7 +42,8 @@ app.use('/api/users', usersR);
 app.use('/api/clients', clients);
 app.use('/api/oauth/token', oauth2.token);
 
-app.listen(config.get('port'), function(){
+var server = http.createServer(app);
+server.listen(config.get('port'), function(){
     logger.info('Express server listening on port ' + config.get('port'));
 });
 
@@ -57,5 +60,3 @@ app.use(function(err, req, res, next){
     res.send({ error: err.message });
     return;
 });
-
-module.exports = app;

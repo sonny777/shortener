@@ -21,9 +21,7 @@ router.get('/', /*passport.authenticate('bearer', { session: false }),*/ functio
 });
 
 router.post('/byShortValue', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
-
     Link.findOne({'shortValue': req.body.shortValue}, function (err, link) {
-
         if(!link) {
             res.statusCode = 404;
             logger.error('Not found.');
@@ -31,12 +29,11 @@ router.post('/byShortValue', /*passport.authenticate('bearer', { session: false 
                 error: 'Not found'
             });
         }
-
         if (!err) {
             logger.info('The method byShortValue completed successfully.');
             return res.json({
                 status: 'OK',
-                link:link
+                link: link
             });
         } else {
             res.statusCode = 500;

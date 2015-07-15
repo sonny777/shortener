@@ -19,6 +19,32 @@ router.get('/', /*passport.authenticate('bearer', { session: false }),*/ functio
     });
 });
 
+router.post('/byName', function(req, res) {
+    User.findOne({'username': req.body.username}, function (err, user) {
+        if(!user) {
+            res.statusCode = 404;
+            logger.error('Not found.');
+            return res.json({
+                error: 'Not found'
+            });
+        }
+        if (!err) {
+            req.session.user = user.id;
+            logger.info('User find with name ' + user.username);
+            return res.json({
+                status: 'OK',
+                user: user
+            });
+        } else {
+            res.statusCode = 500;
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
+            return res.json({
+                error: 'Server error'
+            });
+        }
+    });
+});
+
 /*
  *  аутентификация не нужна,
  *  метод используется для регистрации новых пользователей
@@ -29,6 +55,7 @@ router.post('/post', function(req, res) {
         username: req.body.username,
         password: req.body.password
     });
+    //req.session.user = user.id;
 
     user.save(function (err) {
         if (!err) {

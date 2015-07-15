@@ -1,6 +1,6 @@
 'use strict';
 
-var views = angular.module('sm.login', ['ui.router', 'services']);
+var views = angular.module('sm.login', ['ngStorage', 'ui.router', 'services']);
 
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('login', {
@@ -10,11 +10,24 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('loginCtrl', ['$scope', '$http', 'TokenService', function ($scope, $http, TokenService) {
-    $scope.getToken = function() {
-        TokenService.getToken().success(function (data, status) {
-            $scope.token = data;
-        });
-    };
-}]);
-
+views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'UserService', '$rootScope', '$localStorage',
+    function ($scope, $http, $state, TokenService, UserService, $rootScope, $localStorage) {
+        $rootScope.loggedIn = $localStorage.userId;
+            $scope.getToken = function () {
+                TokenService.getToken()
+                    .success(function (data, status) {
+                        console.log('Authorization success.');
+                        $scope.token = data;
+                        UserService.getUserByName().success(function (data, status) {
+                            var userId = data.user._id;
+                            $localStorage.userId = userId;
+                            console.log('User find with id ' + userId);
+                        });
+                        $state.go('links');
+                        $rootScope.loggedIn = data;
+                    }).
+                    error(function (data, status) {
+                        console.log('Authorization failed.');
+                    });
+            };
+    }]);

@@ -4,25 +4,32 @@
     <meta charset="utf-8">
     <title>Url Shortener</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+
+
+<body ng-controller="loginCtrl">
 <div class="container">
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
-            <li><a href="#/links">Create Link</a></li>
-            <li><a href="#/users">Users</a></li>
-            <li><a href="#/signup">Login</a></li>
-            <li><a href="#/register">Register</a></li>
+            <li ng-show="loggedIn"><a href="#/links">Create Link</a></li>
+            <li ng-show="loggedIn"><a href="#/users">Users</a></li>
+            <li ng-show="!loggedIn"><a href="#/signup">Login</a></li>
+            <li ng-show="loggedIn"><a href="#/logout">Logout</a></li>
         </ul>
     </nav>
     <div ui-view></div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+
 <script src="bower_components/angularjs/angular.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="js/views/general/login.js"></script>
+<script src="js/views/general/logout.js"></script>
 <script src="js/views/general/register.js"></script>
 <script src="js/views/general/users.js"></script>
 <script src="js/views/link_view/links.js"></script>

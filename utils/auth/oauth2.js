@@ -39,10 +39,10 @@ var generateTokens = function (data, done) {
 
     data.token = refreshTokenValue;
     refreshToken = new RefreshToken(data);
-    logger.info("New token was created successfully.");
+    logger.info("New token was created successfully. " + token.token);
     refreshToken.save(errorHandler);
 
-    token.save(function (err) {
+    token.save(function(err) {
         if (err) {
             logger.error(err);
             return done(err);
