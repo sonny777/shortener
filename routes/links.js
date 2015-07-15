@@ -20,6 +20,20 @@ router.get('/', /*passport.authenticate('bearer', { session: false }),*/ functio
     });
 });
 
+router.get('/byUserId', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+    return Link.find({ 'userId': req.query.userId }, function (err, links) {
+        if (!err) {
+            return res.json(links)
+        } else {
+            res.statusCode = 500;
+            log.error('Internal error(%d): %s',res.statusCode,err.message);
+            return res.send({
+                error: 'Server error'
+            });
+        }
+    });
+});
+
 router.post('/byShortValue', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
     Link.findOne({'shortValue': req.body.shortValue}, function (err, link) {
         if(!link) {
@@ -46,7 +60,7 @@ router.post('/byShortValue', /*passport.authenticate('bearer', { session: false 
     });
 });
 
-router.post('/post', passport.authenticate('bearer', { session: false }), function(req, res) {
+router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
 
     var link = new Link({
         fullValue: req.body.fullValue,

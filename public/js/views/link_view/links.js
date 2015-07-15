@@ -1,6 +1,6 @@
 'use strict';
 
-var views = angular.module('sm.links', ['ui.router', 'services']);
+var views = angular.module('sm.links', ['ui.router', 'services', 'ngTagsInput']);
 
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('links', {
@@ -10,14 +10,24 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'UrlService', function ($scope, $http, $window, UserService, UrlService) {
+views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, UserService, UrlService, $rootScope) {
 
-    UrlService.getUrls().success(function (data, status) {
+    /*$scope.loadTags = function(query) {
+        return $http.get('/tags?query=' + query);
+    };*/
+
+    var userId = '';
+    if ( angular.isObject($rootScope.loggedIn)) {
+        userId = $rootScope.rootUserId;
+    } else {
+        userId = $rootScope.loggedIn;
+    }
+    UrlService.getUrlsByUserId(userId).success(function (data, status) {
         $scope.urls = data;
     });
 
     $scope.createUrl = function() {
-        UrlService.createUrl().success(function (data, status) {
+        UrlService.createUrl($scope.tags, userId).success(function (data, status) {
             $scope.urls = data;
         });
     };

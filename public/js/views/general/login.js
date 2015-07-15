@@ -21,6 +21,7 @@ views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'Use
                         UserService.getUserByName().success(function (data, status) {
                             var userId = data.user._id;
                             $localStorage.userId = userId;
+                            $rootScope.rootUserId = userId; //!!!!!
                             console.log('User find with id ' + userId);
                         });
                         $state.go('links');

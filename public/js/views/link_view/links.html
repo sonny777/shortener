@@ -6,6 +6,9 @@
                 <input name="longValue" ng-model="vm.link.longValue" type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" id="longValue" placeholder="Paste your long URL here" required>
                 <label>Description:</label>
                 <textarea name="description" ng-model="vm.link.description" class="form-control ng-pristine ng-invalid ng-invalid-required" rows="3" id="description" placeholder="Description" required></textarea>
+                <tags-input ng-model="tags">
+                    <auto-complete <!--source="loadTags($query)"--> />
+                </tags-input>
                 <div class="col-sm-2" style="margin-top:5px">
                     <button ng-disabled="!urlshortener.$valid" type="submit" class="btn btn-primary" ng-click="createUrl(url)" disabled="disabled">Shorten URL</button>
                 </div>
@@ -16,14 +19,14 @@
                     <table class="table table-hover">
                         <thead>
                         <th>LONG URL</th>
-                        <th>CREATED</th>
+                        <!--<th>CREATED</th>-->
                         <th>SHORT URL</th>
                         <th>CLICKS</th>
                         </thead>
                         <tbody>
                         <tr ng-repeat="url in urls" ng-href="#" data-ng-click="redirect(url.shortValue)">
                             <td>{{url.fullValue}}</td>
-                            <td>{{url.hopCount}}</td>
+                            <!--<td>{{url.hopCount}}</td>-->
                             <td>{{url.shortValue}}</td>
                             <td>{{url.hopCount}}</td>
                         </tr>
