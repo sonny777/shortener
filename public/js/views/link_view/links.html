@@ -24,10 +24,11 @@
                         <th>CLICKS</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="url in urls" ng-href="#" data-ng-click="redirect(url.shortValue)">
-                            <td>{{url.fullValue}}</td>
+                        <tr ng-repeat="url in urls">
+                            <td><input type="radio" name="urlSelect" ng-model="selectedValue" value="{{url._id}}"/></td>
+                            <td><a ng-href="{{url.fullValue}}"/>{{url.fullValue}}</td>
                             <!--<td>{{url.hopCount}}</td>-->
-                            <td>{{url.shortValue}}</td>
+                            <td><a ng-href="{{url.shortValue}}" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</td>
                             <td>{{url.hopCount}}</td>
                         </tr>
                         </tbody>

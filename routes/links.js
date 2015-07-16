@@ -95,4 +95,58 @@ router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ fu
     });
 });
 
+router.put('/update', function (req, res){
+    return Link.findById( req.query.linkId , function (err, link) {
+        if(!link) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        link.fullValue = req.body.fullValue;
+        link.shortValue = link.shortValue;
+        link.description = req.body.description;
+        link.tags = req.body.tags;
+        link.hopCount = req.body.hopCount;
+        link.userId = req.body.userId;
+        return link.save(function (err) {
+            if (!err) {
+                logger.info("Link was updated successfully.");
+                return res.send({ status: 'OK', link: link });
+            } else {
+                if(err.name == 'ValidationError') {
+                    res.statusCode = 400;
+                    res.send({ error: 'Validation error' });
+                } else {
+                    res.statusCode = 500;
+                    res.send({ error: 'Server error' });
+                }
+                log.error('Internal error(%d): %s',res.statusCode,err.message);
+            }
+        });
+    });
+});
+
+router.delete('/update', function (req, res){
+    return Link.findById( req.query.linkId , function (err, link) {
+        if(!link) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        return link.remove(function (err) {
+            if (!err) {
+                logger.info("Link was removed successfully.");
+                return res.send({ status: 'OK' });
+            } else {
+                if(err.name == 'ValidationError') {
+                    res.statusCode = 400;
+                    res.send({ error: 'Validation error' });
+                } else {
+                    res.statusCode = 500;
+                    res.send({ error: 'Server error' });
+                }
+                log.error('Internal error(%d): %s',res.statusCode,err.message);
+            }
+        });
+    });
+});
+
 module.exports = router;

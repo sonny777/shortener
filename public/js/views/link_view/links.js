@@ -38,7 +38,7 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
             var newUrl = data.link.fullValue;
             $window.location.href = newUrl;
         });
-    }
+    };
 
     UserService.getUsers().success(function (data, status) {
         $scope.users = data;
