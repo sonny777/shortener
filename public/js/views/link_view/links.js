@@ -12,24 +12,18 @@ views.config(['$stateProvider', function ($stateProvider) {
 
 views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, UserService, UrlService, $rootScope) {
 
-    /*$scope.loadTags = function(query) {
-        return $http.get('/tags?query=' + query);
-    };*/
-
     var userId = '';
     if ( angular.isObject($rootScope.loggedIn)) {
         userId = $rootScope.rootUserId;
     } else {
         userId = $rootScope.loggedIn;
     }
-    UrlService.getUrlsByUserId(userId).success(function (data, status) {
-        $scope.urls = data;
-    });
-
     // create url
     $scope.createUrl = function() {
         UrlService.createUrl($scope.tags, userId).success(function (data, status) {
-            $scope.urls = data;
+            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+                $scope.urls = data;
+            });
         });
     };
 
@@ -39,30 +33,35 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
             $scope.urlObject = data;
             var newUrl = data.link.fullValue;
             $window.location.href = newUrl;
-            UrlService.updateUrlHopCount(data.link._id).success(function (data, status) {
-                $scope.urls = data;
-            });
+            UrlService.updateUrlHopCount(data.link._id);
         });
     };
 
     // update url info
     $scope.updateUrl = function() {
         UrlService.updateUrl($scope.selectedValue, $scope.urls, $scope.tags, $scope.vm.link, userId).success(function (data, status) {
-            $scope.urls = data;
+            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+                $scope.urls = data;
+            });
             $scope.longValue = '';
             $scope.description = '';
             $scope.tags = '';
+            $scope.selectedValue = false;
         });
     };
 
     // delete url
     $scope.deleteUrl = function() {
         UrlService.deleteUrl($scope.selectedValue).success(function (data, status) {
-            $scope.urls = data;
+            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+                $scope.urls = data;
+                $scope.selectedValue = false;
+            });
         });
     };
 
-    UserService.getUsers().success(function (data, status) {
-        $scope.users = data;
+    UrlService.getUrlsByUserId(userId).success(function (data, status) {
+        $scope.urls = data;
     });
+
 }]);

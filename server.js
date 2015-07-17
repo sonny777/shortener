@@ -9,6 +9,7 @@ var http                = require('http');
 require('./utils/auth/oauth'); // Важно!
 var config              = require('./configs/index');
 var oauth2              = require('./utils/auth/oauth2');
+var oauthR              = require('./routes/oauth');
 var usersR              = require('./routes/users');
 var links               = require('./routes/links');
 var clients             = require('./routes/clients');
@@ -41,6 +42,7 @@ app.use('/api/links', links);
 app.use('/api/users', usersR);
 app.use('/api/clients', clients);
 app.use('/api/oauth/token', oauth2.token);
+app.use('/api/oauth', oauthR);
 
 var server = http.createServer(app);
 server.listen(config.get('port'), function(){

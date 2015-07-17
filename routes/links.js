@@ -159,7 +159,7 @@ router.put('/update', function (req, res){
         link.tags = req.body.tags;
         link.hopCount = req.body.hopCount;
         link.userId = req.body.userId;
-        return link.update(function (err) {
+        return link.save(function (err) {
             if (!err) {
                 logger.info("Link was updated successfully.");
                 return res.send({ status: 'OK', link: link });
@@ -190,7 +190,7 @@ router.put('/updateHopCount', function (req, res) {
         link.tags = link.tags;
         link.hopCount = currentCount + 1;
         link.userId = link.userId;
-        return link.update(function (err) {
+        return link.save(function (err) {
             if (!err) {
                 logger.info("Link hop count was updated successfully.");
                 return res.send({ status: 'OK', link: link });

@@ -11,8 +11,8 @@
                 </tags-input>
                 <div class="col-sm-2 buttonsStyle" style="margin-top:5px">
                     <button ng-disabled="!urlshortener.$valid" type="submit" class="btn btn-primary" ng-click="createUrl(url)" disabled="disabled">Shorten URL</button>
-                    <button ng-disabled="!urlshortener.$valid" class="btn btn-success" ng-click="updateUrl();"><i class=""></i>Update</button>
-                    <button class="btn btn-danger" ng-click="deleteUrl();"><i class=""></i>Delete</button>
+                    <button ng-disabled="!urlshortener.$valid || !selectedValue" type="button" class="btn btn-success" ng-click="updateUrl();"><i class=""></i>Update</button>
+                    <button ng-disabled="!selectedValue" class="btn btn-danger" type="button" ng-click="deleteUrl();"><i class=""></i>Delete</button>
                 </div>
             </div>
             <p></p>

@@ -10,8 +10,8 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'UserService', '$rootScope', '$localStorage',
-    function ($scope, $http, $state, TokenService, UserService, $rootScope, $localStorage) {
+views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'UserService', '$rootScope', '$localStorage', '$timeout',
+    function ($scope, $http, $state, TokenService, UserService, $rootScope, $localStorage, $timeout) {
         $rootScope.loggedIn = $localStorage.userId;
             $scope.getToken = function () {
                 TokenService.getToken()
@@ -31,4 +31,18 @@ views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'Use
                         console.log('Authorization failed.');
                     });
             };
+
+        /*-- Automatically start poller1 on page load --*/
+        /*var user = null;
+        var refreshToken = null;
+        $timeout(TokenService.getRefreshTokenByUserId($localStorage.userId).success(function (data, status) {
+            refreshToken = data.refreshToken.token;
+            UserService.getUserById($localStorage.userId).success(function (data, status) {
+                user = data.user;
+                TokenService.refreshToken(refreshToken, user).success(function (data, status) {
+                    console.log('Refresh token success.');
+                });
+            });
+        }), 3600);*/
+
     }]);

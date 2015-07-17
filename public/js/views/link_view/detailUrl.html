@@ -33,7 +33,6 @@
                             <tr ng-repeat="urlByTag in urlsByTag">
                                 <td><a ng-href="{{urlByTag.fullValue}}"/>{{urlByTag.fullValue}}</td>
                                 <td><a ng-href="{{urlByTag.shortValue}}" data-ng-click="redirect(urlByTag.shortValue)"/>{{urlByTag.shortValue}}</td>
-                                <td>{{url.hopCount}}</td>
                             </tr>
                         </tbody>
                     </table>
