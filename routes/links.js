@@ -20,13 +20,39 @@ router.get('/', /*passport.authenticate('bearer', { session: false }),*/ functio
     });
 });
 
+// TODO: need post
 router.get('/byUserId', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
     return Link.find({ 'userId': req.query.userId }, function (err, links) {
         if (!err) {
             return res.json(links)
         } else {
             res.statusCode = 500;
-            log.error('Internal error(%d): %s',res.statusCode,err.message);
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
+            return res.send({
+                error: 'Server error'
+            });
+        }
+    });
+});
+
+router.post('/byId', function(req, res) {
+    Link.findById({ '_id': req.body.urlId }, function (err, link) {
+        if(!link) {
+            res.statusCode = 404;
+            logger.error('Not found.');
+            return res.json({
+                error: 'Not found'
+            });
+        }
+        if (!err) {
+            logger.info('Url with id ' + req.body.urlId + ' was found.');
+            return res.json({
+                status: 'OK',
+                link: link
+            });
+        } else {
+            res.statusCode = 500;
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
             return res.send({
                 error: 'Server error'
             });
@@ -35,7 +61,7 @@ router.get('/byUserId', /*passport.authenticate('bearer', { session: false }),*/
 });
 
 router.post('/byShortValue', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
-    Link.findOne({'shortValue': req.body.shortValue}, function (err, link) {
+    Link.findOne({ 'shortValue': req.body.shortValue }, function (err, link) {
         if(!link) {
             res.statusCode = 404;
             logger.error('Not found.');
@@ -45,6 +71,32 @@ router.post('/byShortValue', /*passport.authenticate('bearer', { session: false 
         }
         if (!err) {
             logger.info('The method byShortValue completed successfully.');
+            return res.json({
+                status: 'OK',
+                link: link
+            });
+        } else {
+            res.statusCode = 500;
+            logger.error('Internal error(%d): %s',res.statusCode,err.message);
+
+            return res.json({
+                error: 'Server error'
+            });
+        }
+    });
+});
+
+router.post('/byTag', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+    Link.find({ 'tags': req.body.tag }, function (err, link) {
+        if(!link) {
+            res.statusCode = 404;
+            logger.error('Not found.');
+            return res.json({
+                error: 'Not found'
+            });
+        }
+        if (!err) {
+            logger.info('The method byTag completed successfully.');
             return res.json({
                 status: 'OK',
                 link: link
@@ -96,6 +148,7 @@ router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ fu
 });
 
 router.put('/update', function (req, res){
+    debugger;
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -119,13 +172,43 @@ router.put('/update', function (req, res){
                     res.statusCode = 500;
                     res.send({ error: 'Server error' });
                 }
-                log.error('Internal error(%d): %s',res.statusCode,err.message);
+                logger.error('Internal error(%d): %s',res.statusCode,err.message);
             }
         });
     });
 });
 
-router.delete('/update', function (req, res){
+router.put('/updateHopCount', function (req, res){
+    return Link.findById( req.query.linkId , function (err, link) {
+        if(!link) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        link.fullValue = link.fullValue;
+        link.shortValue = link.shortValue;
+        link.description = link.description;
+        link.tags = link.tags;
+        link.hopCount = req.body.hopCount;
+        link.userId = link.userId;
+        return link.save(function (err) {
+            if (!err) {
+                logger.info("Link hop count was updated successfully.");
+                return res.send({ status: 'OK', link: link });
+            } else {
+                if(err.name == 'ValidationError') {
+                    res.statusCode = 400;
+                    res.send({ error: 'Validation error' });
+                } else {
+                    res.statusCode = 500;
+                    res.send({ error: 'Server error' });
+                }
+                logger.error('Internal error(%d): %s',res.statusCode,err.message);
+            }
+        });
+    });
+});
+
+router.delete('/delete', function (req, res){
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -143,7 +226,7 @@ router.delete('/update', function (req, res){
                     res.statusCode = 500;
                     res.send({ error: 'Server error' });
                 }
-                log.error('Internal error(%d): %s',res.statusCode,err.message);
+                logger.error('Internal error(%d): %s',res.statusCode,err.message);
             }
         });
     });

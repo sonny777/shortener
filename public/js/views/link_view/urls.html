@@ -5,16 +5,16 @@
                 <div class="table-responsive">
                     <table class="table table-hover" >
                         <thead>
-                        <th></th>
-                        <th>SHORT URL</th>
-                        <th>CLICKS</th>
+                            <!--<th></th>-->
+                            <th>SHORT URL</th>
+                            <th>CLICKS</th>
                         </thead>
-                        <tbody>
-                        <tr ng-repeat="url in urls" >
-                            <td><input type="radio" name="urlSelect" ng-model="selectedValue" value="{{url._id}}"/></td>
-                            <td><a ng-href="{{url.shortValue}}" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</td>
-                            <td>{{url.hopCount}}</td>
-                        </tr>
+                            <tbody>
+                            </button>
+                            <tr ng-repeat="url in urls" ui-sref="detailUrl({ urlId: url._id })">
+                                <td><a ng-href="{{url.shortValue}}" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</td>
+                                <td>{{url.hopCount}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

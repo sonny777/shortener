@@ -9,8 +9,10 @@
                 <tags-input ng-model="tags">
                     <auto-complete <!--source="loadTags($query)"--> />
                 </tags-input>
-                <div class="col-sm-2" style="margin-top:5px">
+                <div class="col-sm-2" style="margin-top:5px"> <!--display: inline float : initial-->
                     <button ng-disabled="!urlshortener.$valid" type="submit" class="btn btn-primary" ng-click="createUrl(url)" disabled="disabled">Shorten URL</button>
+                    <button ng-disabled="!urlshortener.$valid" class="btn btn-success" ng-click="updateUrl();"><i class=""></i>Update</button>
+                    <button class="btn btn-danger" ng-click="deleteUrl();"><i class=""></i>Erase</button>
                 </div>
             </div>
             <p></p>
@@ -18,19 +20,20 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                        <th>LONG URL</th>
-                        <!--<th>CREATED</th>-->
-                        <th>SHORT URL</th>
-                        <th>CLICKS</th>
+                            <th></th>
+                            <th>LONG URL</th>
+                            <!--<th>CREATED</th>-->
+                            <th>SHORT URL</th>
+                            <th>CLICKS</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="url in urls">
-                            <td><input type="radio" name="urlSelect" ng-model="selectedValue" value="{{url._id}}"/></td>
-                            <td><a ng-href="{{url.fullValue}}"/>{{url.fullValue}}</td>
-                            <!--<td>{{url.hopCount}}</td>-->
-                            <td><a ng-href="{{url.shortValue}}" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</td>
-                            <td>{{url.hopCount}}</td>
-                        </tr>
+                            <p></p>
+                            <tr ng-repeat="url in urls">
+                                <td><input type="radio" name="urlSelect" ng-model="$parent.selectedValue" value="{{url._id}}"/></td>
+                                <td><a ng-href="{{url.fullValue}}"/>{{url.fullValue}}</td>
+                                <td><a ng-href="{{url.shortValue}}" data-ng-click="redirect(url.shortValue)"/>{{url.shortValue}}</td>
+                                <td>{{url.hopCount}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
