@@ -7,12 +7,12 @@
                 <label>Description:</label>
                 <textarea name="description" ng-model="vm.link.description" class="form-control ng-pristine ng-invalid ng-invalid-required" rows="3" id="description" placeholder="Description" required></textarea>
                 <tags-input ng-model="tags">
-                    <auto-complete <!--source="loadTags($query)"--> />
+                    <auto-complete/>
                 </tags-input>
-                <div class="col-sm-2" style="margin-top:5px"> <!--display: inline float : initial-->
+                <div class="col-sm-2 buttonsStyle" style="margin-top:5px">
                     <button ng-disabled="!urlshortener.$valid" type="submit" class="btn btn-primary" ng-click="createUrl(url)" disabled="disabled">Shorten URL</button>
                     <button ng-disabled="!urlshortener.$valid" class="btn btn-success" ng-click="updateUrl();"><i class=""></i>Update</button>
-                    <button class="btn btn-danger" ng-click="deleteUrl();"><i class=""></i>Erase</button>
+                    <button class="btn btn-danger" ng-click="deleteUrl();"><i class=""></i>Delete</button>
                 </div>
             </div>
             <p></p>

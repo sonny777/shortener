@@ -116,7 +116,7 @@ router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ fu
 
     var link = new Link({
         fullValue: req.body.fullValue,
-        shortValue: 'local.host/' + shortId.generate(),
+        shortValue: shortId.generate(),
         description: req.body.description,
         tags: req.body.tags,
         hopCount: req.body.hopCount,
