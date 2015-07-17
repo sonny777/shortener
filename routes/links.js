@@ -148,7 +148,6 @@ router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ fu
 });
 
 router.put('/update', function (req, res){
-    debugger;
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -160,7 +159,7 @@ router.put('/update', function (req, res){
         link.tags = req.body.tags;
         link.hopCount = req.body.hopCount;
         link.userId = req.body.userId;
-        return link.save(function (err) {
+        return link.update(function (err) {
             if (!err) {
                 logger.info("Link was updated successfully.");
                 return res.send({ status: 'OK', link: link });
@@ -178,19 +177,20 @@ router.put('/update', function (req, res){
     });
 });
 
-router.put('/updateHopCount', function (req, res){
+router.put('/updateHopCount', function (req, res) {
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;
             return res.send({ error: 'Not found' });
         }
+        var currentCount = link.hopCount;
         link.fullValue = link.fullValue;
         link.shortValue = link.shortValue;
         link.description = link.description;
         link.tags = link.tags;
-        link.hopCount = req.body.hopCount;
+        link.hopCount = currentCount + 1;
         link.userId = link.userId;
-        return link.save(function (err) {
+        return link.update(function (err) {
             if (!err) {
                 logger.info("Link hop count was updated successfully.");
                 return res.send({ status: 'OK', link: link });

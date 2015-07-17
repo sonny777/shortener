@@ -79,7 +79,6 @@ services.factory('UrlService', ['$http', function($http) {
                     return false;
                 }
             });
-            debugger;
             var params = {
                 'fullValue': url.fullValue,
                 'description' : url.description,
@@ -102,18 +101,14 @@ services.factory('UrlService', ['$http', function($http) {
                 }
             });
         },
-        updateUrlHopCount: function(linkId, userId) {
-            var params = {
-                'hopCount': 22
-            };
-            var data = JSON.stringify(params);
+        updateUrlHopCount: function(linkId) {
             return $http({
                 params: {
                     'linkId': linkId
                 },
                 method: 'PUT',
-                url: '/api/links/update',
-                data:  data,
+                url: '/api/links/updateHopCount',
+                //data:  data,
                 headers: { 'Content-Type': 'application/json'/*, 'Authorization': 'Bearer bfda5fbfd1d6e383740168fe0196ae960b35d1112a54023d9641013269336204'*/ }
             })
         }

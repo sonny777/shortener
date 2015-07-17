@@ -39,6 +39,9 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
             $scope.urlObject = data;
             var newUrl = data.link.fullValue;
             $window.location.href = newUrl;
+            UrlService.updateUrlHopCount(data.link._id).success(function (data, status) {
+                $scope.urls = data;
+            });
         });
     };
 
