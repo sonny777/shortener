@@ -26,19 +26,38 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
         $scope.urls = data;
     });
 
+    // create url
     $scope.createUrl = function() {
         UrlService.createUrl($scope.tags, userId).success(function (data, status) {
             $scope.urls = data;
         });
     };
 
+    // redirect to full url
     $scope.redirect = function(shortValue) {
         UrlService.getUrlByShortValue(shortValue).success(function (data, status) {
             $scope.urlObject = data;
             var newUrl = data.link.fullValue;
             $window.location.href = newUrl;
         });
-    }
+    };
+
+    // update url info
+    $scope.updateUrl = function() {
+        UrlService.updateUrl($scope.selectedValue, $scope.urls, $scope.tags, $scope.vm.link, userId).success(function (data, status) {
+            $scope.urls = data;
+            $scope.longValue = '';
+            $scope.description = '';
+            $scope.tags = '';
+        });
+    };
+
+    // delete url
+    $scope.deleteUrl = function() {
+        UrlService.deleteUrl($scope.selectedValue).success(function (data, status) {
+            $scope.urls = data;
+        });
+    };
 
     UserService.getUsers().success(function (data, status) {
         $scope.users = data;
