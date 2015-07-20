@@ -3,7 +3,7 @@ var views = angular.module('sm.logout', ['ngStorage', 'ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('logout', {
         url: '/logout',
-        templateUrl: 'js/views/general/logout.html',
+        templateUrl: 'js/views/logout.html',
         controller: 'logoutCtrl'
     });
 }]);
@@ -13,4 +13,4 @@ views.controller('logoutCtrl', ['$scope', '$http', '$state', '$rootScope', '$loc
         $rootScope.loggedIn = false;
         $localStorage.userId = '';
         $state.go('login');
-}]);
+    }]);

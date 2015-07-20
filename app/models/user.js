@@ -1,5 +1,4 @@
 var async       = require('async');
-var AuthError   = require('../errors').AuthError;
 var crypto      = require('crypto');
 
 var mongoose = require('mongoose'),

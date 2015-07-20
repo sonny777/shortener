@@ -3,7 +3,7 @@ var views = angular.module('sm.urls', ['ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('urls', {
         url: '/urls',
-        templateUrl: 'js/views/link_view/urls.html',
+        templateUrl: 'js/views/urls.html',
         controller: 'urlsCtrl'
     });
 }]);

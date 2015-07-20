@@ -1,11 +1,11 @@
 var log4js          = require('log4js');
 var logger          = log4js.getLogger();
-var db              = require('./utils/db/mongoose');
-var config          = require('./configs/index');
-var Link            = require('./models/link');
-var User            = require('./models/user');
-var Client          = require('./models/client');
-var shortId         = require('./utils/generate/index');
+var db              = require('./app/utils/db/mongoose');
+var config          = require('./app/configs/index');
+var Link            = require('./app/models/link');
+var User            = require('./app/models/user');
+var Client          = require('./app/models/client');
+var shortId         = require('./app/utils/generate/index');
 
 //User.remove({}, function(err) {
 //    var user = new User({

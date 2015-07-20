@@ -3,7 +3,7 @@ var views = angular.module('sm.detailUrls', ['ui.router', 'services']);
 views.config(['$stateProvider', function ($stateProvider) {
     $stateProvider.state('detailUrl', {
         url: '/urls/:urlId',
-        templateUrl: 'js/views/link_view/detailUrl.html',
+        templateUrl: 'js/views/detailUrl.html',
         controller: 'detailUrlCtrl'
     });
 }]);

@@ -6,14 +6,14 @@ var bodyParser          = require('body-parser');
 var passport            = require('passport');
 var methodOverride      = require('method-override');
 var http                = require('http');
-require('./utils/auth/oauth');
-var config              = require('./configs/index');
-var oauth2              = require('./utils/auth/oauth2');
-var oauthR              = require('./routes/oauth');
-var usersR              = require('./routes/users');
-var links               = require('./routes/links');
-var clients             = require('./routes/clients');
-var mongoose            = require('./utils/db/mongoose');
+require('./app/utils/auth/oauth');
+var config              = require('./app/configs/index');
+var oauth2              = require('./app/utils/auth/oauth2');
+var oauthR              = require('./app/routes/oauth');
+var usersR              = require('./app/routes/users');
+var links               = require('./app/routes/links');
+var clients             = require('./app/routes/clients');
+var mongoose            = require('./app/utils/db/mongoose');
 var session             = require('express-session');
 var MongoStore          = require('connect-mongo')(session);
 var router              = express.Router();
@@ -62,3 +62,5 @@ app.use(function(err, req, res, next){
     res.send({ error: err.message });
     return;
 });
+
+module.exports = app;
