@@ -20,12 +20,12 @@ views.controller('detailUrlCtrl', ['$scope', '$http', '$stateParams', '$window',
         $scope.fullValue = data.link.fullValue;
         $scope.shortValue = data.link.shortValue;
         $scope.hopCount = data.link.hopCount;
-        $scope.tags = data.link.tags;
+        $scope.urlTags = data.link.tags;
         $scope.userId = data.link.userId;
     });
 
-    $scope.searchByTag = function() {
-        UrlService.getByTag($scope.url.link.tags[0]).success(function (data, status) {
+    $scope.searchByTag = function(tag) {
+        UrlService.getByTag(tag).success(function (data, status) {
             $scope.urlsByTag = data.link;
             $scope.showSearchByTag = true;
         });
@@ -34,10 +34,10 @@ views.controller('detailUrlCtrl', ['$scope', '$http', '$stateParams', '$window',
     // redirect to full url
     $scope.redirect = function(shortValue) {
         UrlService.getUrlByShortValue(shortValue).success(function (data, status) {
-            debugger;
             $scope.urlObject = data;
             var newUrl = data.link.fullValue;
             $window.location.href = newUrl;
+            UrlService.updateUrlHopCount(data.link._id);
         });
     };
 

@@ -5,7 +5,7 @@ var logger          = log4js.getLogger();
 var router          = express.Router();
 var User            = require('../models/user');
 
-router.get('/', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+router.post('/', passport.authenticate('bearer', { session: false }), function(req, res) {
     User.find(function (err, users) {
         if (!err) {
             return res.send(users);
@@ -75,13 +75,12 @@ router.post('/byName', function(req, res) {
  *  аутентификация не нужна,
  *  метод используется для регистрации новых пользователей
 */
-router.post('/post', function(req, res) {
+router.post('/create', function(req, res) {
 
     var user = new User({
         username: req.body.username,
         password: req.body.password
     });
-    //req.session.user = user.id;
 
     user.save(function (err) {
         if (!err) {

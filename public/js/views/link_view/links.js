@@ -10,18 +10,26 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, UserService, UrlService, $rootScope) {
+views.controller('linksCtrl', ['$scope', '$http', '$window', 'TokenService', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, TokenService, UserService, UrlService, $rootScope) {
 
+    var token = null;
     var userId = '';
     if ( angular.isObject($rootScope.loggedIn)) {
         userId = $rootScope.rootUserId;
     } else {
         userId = $rootScope.loggedIn;
     }
+    TokenService.getTokenByUserId(userId).success(function (data, status) {
+        token = data.accessToken.token;
+        UrlService.getUrlsByUserId(userId, token).success(function (data, status) {
+            $scope.urls = data;
+        });
+    });
+
     // create url
     $scope.createUrl = function() {
-        UrlService.createUrl($scope.tags, userId).success(function (data, status) {
-            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+        UrlService.createUrl($scope.tags, userId, token).success(function (data, status) {
+            UrlService.getUrlsByUserId(userId, token).success(function (data, status) {
                 $scope.urls = data;
             });
         });
@@ -39,8 +47,8 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
 
     // update url info
     $scope.updateUrl = function() {
-        UrlService.updateUrl($scope.selectedValue, $scope.urls, $scope.tags, $scope.vm.link, userId).success(function (data, status) {
-            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+        UrlService.updateUrl($scope.selectedValue, $scope.urls, $scope.tags, $scope.vm.link, userId, token).success(function (data, status) {
+            UrlService.getUrlsByUserId(userId, token).success(function (data, status) {
                 $scope.urls = data;
             });
             $scope.longValue = '';
@@ -52,16 +60,12 @@ views.controller('linksCtrl', ['$scope', '$http', '$window', 'UserService', 'Url
 
     // delete url
     $scope.deleteUrl = function() {
-        UrlService.deleteUrl($scope.selectedValue).success(function (data, status) {
-            UrlService.getUrlsByUserId(userId).success(function (data, status) {
+        UrlService.deleteUrl($scope.selectedValue, token).success(function (data, status) {
+            UrlService.getUrlsByUserId(userId, token).success(function (data, status) {
                 $scope.urls = data;
                 $scope.selectedValue = false;
             });
         });
     };
-
-    UrlService.getUrlsByUserId(userId).success(function (data, status) {
-        $scope.urls = data;
-    });
 
 }]);

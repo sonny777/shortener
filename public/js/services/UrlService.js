@@ -4,16 +4,24 @@ var services = angular.module('services');
 
 services.factory('UrlService', ['$http', function($http) {
     return {
-        getUrlsByUserId: function(userId) {
-            return $http.get('/api/links/byUserId', {
-                params: {
-                    'userId': userId
-                }
-            });
+        getUrlsByUserId: function(userId, token) {
+            var params = {
+                'userId': userId
+            };
+            var data = JSON.stringify(params);
+            return $http({
+                method: 'POST',
+                url: '/api/links/byUserId',
+                data: data,
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+            })
         },
         getUrls: function() {
-            return $http.get('/api/links', {
-            });
+            return $http({
+                method: 'POST',
+                url: '/api/links',
+                headers: { 'Content-Type': 'application/json' }
+            })
         },
         getUrlById: function(urlId) {
             var params = {
@@ -31,11 +39,10 @@ services.factory('UrlService', ['$http', function($http) {
             var params = {
                 'tag': tag
             };
-            var data = JSON.stringify(params);
             return $http({
                 method: 'POST',
                 url: '/api/links/byTag',
-                data:  data,
+                data:  params,
                 headers: { 'Content-Type': 'application/json' }
             })
         },
@@ -51,7 +58,7 @@ services.factory('UrlService', ['$http', function($http) {
                 headers: { 'Content-Type': 'application/json' }
             })
         },
-        createUrl: function(tags, userId) {
+        createUrl: function(tags, userId, token) {
             var params = {
                 'fullValue': longValue.value,
                 'description' : description.value,
@@ -62,12 +69,12 @@ services.factory('UrlService', ['$http', function($http) {
             var data = JSON.stringify(params);
             return $http({
                 method: 'POST',
-                url: '/api/links/post',
+                url: '/api/links/create',
                 data:  data,
-                headers: { 'Content-Type': 'application/json'/*, 'Authorization': 'Bearer bfda5fbfd1d6e383740168fe0196ae960b35d1112a54023d9641013269336204'*/ }
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
             })
         },
-        updateUrl: function(linkId, urls, tags, link, userId) {
+        updateUrl: function(linkId, urls, tags, link, userId, token) {
             var url = null;
             angular.forEach(urls, function(value, key) {
                 if (value._id == linkId) {
@@ -91,14 +98,15 @@ services.factory('UrlService', ['$http', function($http) {
                 method: 'PUT',
                 url: '/api/links/update?linkId=' + linkId,
                 data:  data,
-                headers: { 'Content-Type': 'application/json'/*, 'Authorization': 'Bearer bfda5fbfd1d6e383740168fe0196ae960b35d1112a54023d9641013269336204'*/ }
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
             })
         },
-        deleteUrl: function(linkId) {
+        deleteUrl: function(linkId, token) {
             return $http.delete('/api/links/delete', {
                 params: {
                     'linkId': linkId
-                }
+                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
             });
         },
         updateUrlHopCount: function(linkId) {
@@ -108,8 +116,7 @@ services.factory('UrlService', ['$http', function($http) {
                 },
                 method: 'PUT',
                 url: '/api/links/updateHopCount',
-                //data:  data,
-                headers: { 'Content-Type': 'application/json'/*, 'Authorization': 'Bearer bfda5fbfd1d6e383740168fe0196ae960b35d1112a54023d9641013269336204'*/ }
+                headers: { 'Content-Type': 'application/json' }
             })
         }
     }

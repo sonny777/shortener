@@ -39,7 +39,7 @@ var generateTokens = function (data, done) {
 
     data.token = refreshTokenValue;
     refreshToken = new RefreshToken(data);
-    logger.info("New token was created successfully. " + token.token);
+    logger.info("New token was created successfully.");
     refreshToken.save(errorHandler);
 
     token.save(function(err) {
@@ -66,7 +66,7 @@ aserver.exchange(oauth2orize.exchange.password(function(client, username, passwo
         }
         var model = {
             userId: user.userId,
-            clientId: user.username // должно быть clientId: client.clientId
+            clientId: user.username // clientId: client.clientId
         };
 
         generateTokens(model, done);

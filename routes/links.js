@@ -6,7 +6,7 @@ var router          = express.Router();
 var Link            = require('../models/link');
 var shortId         = require('../utils/generate/index');
 
-router.get('/', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+router.post('/', function(req, res) {
     Link.find(function (err, links) {
         if (!err) {
             return res.json(links);
@@ -20,11 +20,10 @@ router.get('/', /*passport.authenticate('bearer', { session: false }),*/ functio
     });
 });
 
-// TODO: need post
-router.get('/byUserId', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
-    return Link.find({ 'userId': req.query.userId }, function (err, links) {
+router.post('/byUserId', passport.authenticate('bearer', { session: false }), function(req, res) {
+    return Link.find({ 'userId': req.body.userId }, function (err, links) {
         if (!err) {
-            return res.json(links)
+            return res.json(links);
         } else {
             res.statusCode = 500;
             logger.error('Internal error(%d): %s',res.statusCode,err.message);
@@ -60,7 +59,7 @@ router.post('/byId', function(req, res) {
     });
 });
 
-router.post('/byShortValue', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+router.post('/byShortValue', function(req, res) {
     Link.findOne({ 'shortValue': req.body.shortValue }, function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -86,7 +85,7 @@ router.post('/byShortValue', /*passport.authenticate('bearer', { session: false 
     });
 });
 
-router.post('/byTag', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
+router.post('/byTag', function(req, res) {
     Link.find({ 'tags': req.body.tag }, function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -112,13 +111,12 @@ router.post('/byTag', /*passport.authenticate('bearer', { session: false }),*/ f
     });
 });
 
-router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ function(req, res) {
-
+router.post('/create', passport.authenticate('bearer', { session: false }), function(req, res) {
     var link = new Link({
         fullValue: req.body.fullValue,
-        shortValue: shortId.generate(),
+        shortValue: req.headers.host + "/" + shortId.generate(),
         description: req.body.description,
-        tags: req.body.tags,
+        tags: JSON.parse(req.body.tags),
         hopCount: req.body.hopCount,
         userId: req.body.userId
     });
@@ -147,7 +145,7 @@ router.post('/post', /*passport.authenticate('bearer', { session: false }),*/ fu
     });
 });
 
-router.put('/update', function (req, res){
+router.put('/update', passport.authenticate('bearer', { session: false }), function (req, res){
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;
@@ -208,7 +206,7 @@ router.put('/updateHopCount', function (req, res) {
     });
 });
 
-router.delete('/delete', function (req, res){
+router.delete('/delete', passport.authenticate('bearer', { session: false }), function (req, res){
     return Link.findById( req.query.linkId , function (err, link) {
         if(!link) {
             res.statusCode = 404;

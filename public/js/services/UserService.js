@@ -28,9 +28,12 @@ services.factory('UserService', ['$http', function($http) {
                 headers: {'Content-Type': 'application/json'}
             })
         },
-        getUsers: function() {
-            return $http.get('/api/users', {
-            });
+        getUsers: function(token) {
+            return $http({
+                method: 'POST',
+                url: '/api/users',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}
+            })
         },
         createUser: function() {
             var params = {
@@ -40,7 +43,7 @@ services.factory('UserService', ['$http', function($http) {
             var data = JSON.stringify(params);
             return $http({
                 method: 'POST',
-                url: '/api/users/post',
+                url: '/api/users/create',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
             })

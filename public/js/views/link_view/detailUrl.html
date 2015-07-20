@@ -18,10 +18,10 @@
                                 <td>Description: {{ description }} </br></td>
                             </tr>
                             <tr>
-                                <td>Hop Count: {{ hopCount }} </br></td>
+                                <td>Total clicks: {{ hopCount }} </br></td>
                             </tr>
                             <tr>
-                                <td>Tags: <a data-ng-click="searchByTag(tags)"/> {{ tags[0] }} </br></td>
+                                <td>Tags: <a href="#" style="display: inline-block;" ng-repeat="urlTag in urlTags" data-ng-click="searchByTag(urlTag)"/> {{ urlTag.text }} </br></td>
                             </tr>
                         </tbody>
                     </table>

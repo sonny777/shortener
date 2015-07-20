@@ -13,11 +13,11 @@ services.factory('ClientService', ['$http', function($http) {
                 'name': username.value,
                 'clientId': username.value,
                 'clientSecret' : password.value
-            }
+            };
             var data = JSON.stringify(params);
             return $http({
                 method: 'POST',
-                url: '/api/clients/post',
+                url: '/api/clients/create',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
             })

@@ -9,7 +9,7 @@ var Client          = require('../models/client');
  *  аутентификация не нужна,
  *  метод используется для регистрации новых пользователей
  */
-router.post('/post', function(req, res) {
+router.post('/create', function(req, res) {
 
     var client = new Client({
         name: req.body.name,

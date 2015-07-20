@@ -15,13 +15,12 @@ var mongoose = require('mongoose'),
             required: true
         },
         tags: {
-            type: [String],
+            type: [],
             required: false
         },
         hopCount: {
             type: Number,
-            required: false/*,
-            default: 0*/
+            required: false
         },
         userId: {
             type: String,

@@ -10,7 +10,7 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('registerCtrl', ['$scope', '$http', 'UserService', 'ClientService', function ($scope, $http, UserService, ClientService) {
+views.controller('registerCtrl', ['$scope', '$http', '$location', 'UserService', 'ClientService', function ($scope, $http, $location, UserService, ClientService) {
     $scope.createUser = function() {
         UserService.createUser().success(function (data, status) {
             $scope.users = data;
@@ -18,6 +18,7 @@ views.controller('registerCtrl', ['$scope', '$http', 'UserService', 'ClientServi
         ClientService.createClient().success(function (data, status) {
             $scope.clients = data;
         });
+        $location.path('/login');
     };
     UserService.getUsers().success(function (data, status) {
         $scope.register = data;

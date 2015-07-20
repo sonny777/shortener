@@ -10,8 +10,10 @@ views.config(['$stateProvider', function ($stateProvider) {
     })
 }]);
 
-views.controller('usersCtrl', ['$scope', '$http', 'UserService', function ($scope, $http, UserService) {
-    UserService.getUsers().success(function (data, status) {
-        $scope.users = data;
+views.controller('usersCtrl', ['$scope', '$http', 'UserService', 'TokenService', '$rootScope', function ($scope, $http, UserService, TokenService, $rootScope) {
+    TokenService.getTokenByUserId($rootScope.loggedIn).success(function (data, status) {
+        UserService.getUsers(data.accessToken.token).success(function (data, status) {
+            $scope.users = data;
+        });
     });
 }]);
