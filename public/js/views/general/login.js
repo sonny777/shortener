@@ -1,5 +1,3 @@
-'use strict';
-
 var views = angular.module('sm.login', ['ngStorage', 'ui.router', 'services']);
 
 views.config(['$stateProvider', function ($stateProvider) {
@@ -7,7 +5,7 @@ views.config(['$stateProvider', function ($stateProvider) {
         url: '/login',
         templateUrl: 'js/views/general/login.html',
         controller: 'loginCtrl'
-    })
+    });
 }]);
 
 views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'UserService', '$rootScope', '$localStorage', '$timeout',

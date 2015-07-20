@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';*/
 
 var services = angular.module('services');
 
@@ -14,14 +14,14 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/byUserId',
                 data: data,
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-            })
+            });
         },
         getUrls: function() {
             return $http({
                 method: 'POST',
                 url: '/api/links',
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
         },
         getUrlById: function(urlId) {
             var params = {
@@ -33,7 +33,7 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/byId',
                 data:  data,
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
         },
         getByTag: function(tag) {
             var params = {
@@ -44,7 +44,7 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/byTag',
                 data:  params,
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
         },
         getUrlByShortValue: function(shortValue) {
             var params = {
@@ -56,7 +56,7 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/byShortValue',
                 data:  data,
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
         },
         createUrl: function(tags, userId, token) {
             var params = {
@@ -72,7 +72,7 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/create',
                 data:  data,
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-            })
+            });
         },
         updateUrl: function(linkId, urls, tags, link, userId, token) {
             var url = null;
@@ -99,7 +99,7 @@ services.factory('UrlService', ['$http', function($http) {
                 url: '/api/links/update?linkId=' + linkId,
                 data:  data,
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-            })
+            });
         },
         deleteUrl: function(linkId, token) {
             return $http.delete('/api/links/delete', {
@@ -117,7 +117,7 @@ services.factory('UrlService', ['$http', function($http) {
                 method: 'PUT',
                 url: '/api/links/updateHopCount',
                 headers: { 'Content-Type': 'application/json' }
-            })
+            });
         }
-    }
+    };
 }]);

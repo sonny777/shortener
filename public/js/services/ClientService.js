@@ -1,5 +1,3 @@
-'use strict';
-
 var services = angular.module('services');
 
 services.factory('ClientService', ['$http', function($http) {
@@ -20,7 +18,7 @@ services.factory('ClientService', ['$http', function($http) {
                 url: '/api/clients/create',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         }
-    }
+    };
 }]);

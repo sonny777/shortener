@@ -1,5 +1,3 @@
-'use strict';
-
 var views = angular.module('sm.urls', ['ui.router', 'services']);
 
 views.config(['$stateProvider', function ($stateProvider) {
@@ -7,7 +5,7 @@ views.config(['$stateProvider', function ($stateProvider) {
         url: '/urls',
         templateUrl: 'js/views/link_view/urls.html',
         controller: 'urlsCtrl'
-    })
+    });
 }]);
 
 views.controller('urlsCtrl', ['$scope', '$http', '$window', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, UserService, UrlService, $rootScope) {

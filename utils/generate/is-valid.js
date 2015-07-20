@@ -1,4 +1,3 @@
-'use strict';
 var alphabet = require('./alphabet');
 
 function isShortId(id) {

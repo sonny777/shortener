@@ -154,7 +154,7 @@ router.put('/update', passport.authenticate('bearer', { session: false }), funct
         link.fullValue = req.body.fullValue;
         link.shortValue = link.shortValue;
         link.description = req.body.description;
-        link.tags = req.body.tags;
+        link.tags = JSON.parse(req.body.tags);
         link.hopCount = req.body.hopCount;
         link.userId = req.body.userId;
         return link.save(function (err) {

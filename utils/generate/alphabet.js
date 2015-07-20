@@ -1,5 +1,3 @@
-'use strict';
-
 var randomFromSeed = require('./random/random-from-seed');
 
 var ORIGINAL = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';

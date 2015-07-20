@@ -1,5 +1,3 @@
-'use strict';
-
 var seed = 1;
 
 /**

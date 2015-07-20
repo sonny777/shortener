@@ -1,5 +1,3 @@
-'use strict';
-
 var views = angular.module('sm.register', ['ui.router', 'services']);
 
 views.config(['$stateProvider', function ($stateProvider) {
@@ -7,7 +5,7 @@ views.config(['$stateProvider', function ($stateProvider) {
         url: '/register',
         templateUrl: 'js/views/general/register.html',
         controller: 'registerCtrl'
-    })
+    });
 }]);
 
 views.controller('registerCtrl', ['$scope', '$http', '$location', 'UserService', 'ClientService', function ($scope, $http, $location, UserService, ClientService) {

@@ -1,5 +1,3 @@
-'use strict';
-
 var alphabet = require('./alphabet');
 var encode = require('./encode');
 var decode = require('./decode');

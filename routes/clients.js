@@ -5,10 +5,6 @@ var logger          = log4js.getLogger();
 var router          = express.Router();
 var Client          = require('../models/client');
 
-/*
- *  аутентификация не нужна,
- *  метод используется для регистрации новых пользователей
- */
 router.post('/create', function(req, res) {
 
     var client = new Client({

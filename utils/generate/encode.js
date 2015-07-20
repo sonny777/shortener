@@ -1,5 +1,3 @@
-'use strict';
-
 var randomByte = require('./random/random-byte');
 
 function encode(lookup, number) {

@@ -6,7 +6,7 @@ var bodyParser          = require('body-parser');
 var passport            = require('passport');
 var methodOverride      = require('method-override');
 var http                = require('http');
-require('./utils/auth/oauth'); // Важно!
+require('./utils/auth/oauth');
 var config              = require('./configs/index');
 var oauth2              = require('./utils/auth/oauth2');
 var oauthR              = require('./routes/oauth');

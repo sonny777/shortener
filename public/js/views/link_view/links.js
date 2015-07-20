@@ -1,5 +1,3 @@
-'use strict';
-
 var views = angular.module('sm.links', ['ui.router', 'services', 'ngTagsInput']);
 
 views.config(['$stateProvider', function ($stateProvider) {
@@ -7,7 +5,7 @@ views.config(['$stateProvider', function ($stateProvider) {
         url: '/links',
         templateUrl: 'js/views/link_view/links.html',
         controller: 'linksCtrl'
-    })
+    });
 }]);
 
 views.controller('linksCtrl', ['$scope', '$http', '$window', 'TokenService', 'UserService', 'UrlService', '$rootScope', function ($scope, $http, $window, TokenService, UserService, UrlService, $rootScope) {

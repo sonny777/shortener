@@ -41,22 +41,22 @@ var shortId         = require('./utils/generate/index');
 //});
 
 Link.remove({}, function(err) {
-    var link = new Link({
-        fullValue: config.get("default:link:fullValue"),
-        shortValue: 'nik.bat/' + shortId.generate(),
-        description: config.get("default:link:description"),
-        tags: config.get("default:link:tags"),
-        hopCount: config.get("default:link:hopCount"),
-        userId: config.get("default:link:userId")
-    });
-
-    link.save(function(err, link) {
-        if(!err) {
-            logger.info("New link - %s:%s", link.fullValue, link.shortValue);
-        }else {
-            return logger.error(err);
-        }
-    });
+    //var link = new Link({
+    //    fullValue: config.get("default:link:fullValue"),
+    //    shortValue: 'nik.bat/' + shortId.generate(),
+    //    description: config.get("default:link:description"),
+    //    tags: config.get("default:link:tags"),
+    //    hopCount: config.get("default:link:hopCount"),
+    //    userId: config.get("default:link:userId")
+    //});
+    //
+    //link.save(function(err, link) {
+    //    if(!err) {
+    //        logger.info("New link - %s:%s", link.fullValue, link.shortValue);
+    //    }else {
+    //        return logger.error(err);
+    //    }
+    //});
 });
 
 setTimeout(function() {

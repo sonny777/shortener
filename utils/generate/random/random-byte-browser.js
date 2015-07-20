@@ -1,5 +1,3 @@
-'use strict';
-
 var crypto = window.crypto || window.msCrypto; // IE 11 uses window.msCrypto
 
 function randomByte() {

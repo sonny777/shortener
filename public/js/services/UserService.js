@@ -1,5 +1,3 @@
-'use strict';
-
 var services = angular.module('services', []);
 
 services.factory('UserService', ['$http', function($http) {
@@ -14,7 +12,7 @@ services.factory('UserService', ['$http', function($http) {
                 url: '/api/users/byId',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         },
         getUserByName: function() {
             var params = {
@@ -26,14 +24,14 @@ services.factory('UserService', ['$http', function($http) {
                 url: '/api/users/byName',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         },
         getUsers: function(token) {
             return $http({
                 method: 'POST',
                 url: '/api/users',
                 headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}
-            })
+            });
         },
         createUser: function() {
             var params = {
@@ -46,7 +44,7 @@ services.factory('UserService', ['$http', function($http) {
                 url: '/api/users/create',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         }
-    }
+    };
 }]);

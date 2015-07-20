@@ -1,5 +1,3 @@
-'use strict';
-
 var services = angular.module('services');
 
 services.factory('TokenService', ['$http', function($http) {
@@ -14,7 +12,7 @@ services.factory('TokenService', ['$http', function($http) {
                 url: '/api/oauth/byUserId',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         },
         getRefreshTokenByUserId: function(userId) {
             var params = {
@@ -26,7 +24,7 @@ services.factory('TokenService', ['$http', function($http) {
                 url: '/api/oauth/refreshTokenByUserId',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         },
         getToken: function() {
             var params = {
@@ -42,7 +40,7 @@ services.factory('TokenService', ['$http', function($http) {
                 url: '/api/oauth/token',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         },
         refreshToken: function(refreshToken, user) {
             var params = {
@@ -57,7 +55,7 @@ services.factory('TokenService', ['$http', function($http) {
                 url: '/api/oauth/token',
                 data:  data,
                 headers: {'Content-Type': 'application/json'}
-            })
+            });
         }
-    }
+    };
 }]);

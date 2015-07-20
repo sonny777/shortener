@@ -76,7 +76,7 @@ passport.use(new BearerStrategy(
                 }
                 if (!user) { return done(null, false, { message: 'Unknown user.' }); }
 
-                var info = { scope: '*' }
+                var info = { scope: '*' };
                 done(null, user, info);
             });
         });

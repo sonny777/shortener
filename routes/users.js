@@ -71,10 +71,6 @@ router.post('/byName', function(req, res) {
     });
 });
 
-/*
- *  аутентификация не нужна,
- *  метод используется для регистрации новых пользователей
-*/
 router.post('/create', function(req, res) {
 
     var user = new User({
