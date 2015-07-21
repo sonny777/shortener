@@ -14,12 +14,13 @@
     "bootstrap":          "~3.3.4",
     "angular-ui-router":  "~0.2.14",
     "ng-tags-input":      "~3.0.0",
-    "angular":            "1.2.16",
-    "angular-route":      "1.2.16",
-    "angular-sanitize":   "1.2.16",
-    "angular-mocks":      "1.2.16",
-    "jquery":             "1.8.3",
-    "underscore":         "1.6.0",
-    "restangular":        "1.4.0"
+    "angular":            "~1.4.3",
+    "angular-route":      "~1.4.3",
+    "angular-sanitize":   "~1.4.3",
+    "angular-mocks":      "~1.4.3",
+    "jquery":             "~2.1.4",
+    "underscore":         "~1.6.0",
+    "restangular":        "~1.4.0",
+    "ngstorage":          "~0.3.7"
   }
 }
