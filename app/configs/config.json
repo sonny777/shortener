@@ -1,4 +1,5 @@
 {
+  "host": "localhost",
   "port": 1337,
   "security": {
     "tokenLife" : 3600
@@ -20,21 +21,21 @@
       "version" : "v1"
     },
     "user": {
-      "username": "nik",
-      "password": "bat"
+      "username": "test",
+      "password": "test"
     },
     "link": {
-      "fullValue": "http://www.nativelabs.net/solutions/",
-      "shortValue": "nik.bat/qwe123",
+      "fullValue": "http://test.com/",
+      "shortValue": "localhost:1337/E1klWASK",
       "description" : "description",
       "tags" : "tag1",
       "hopCount" : 7,
       "userId": "559f8c7db6ee41200d0ab4d3"
     },
     "client": {
-      "name": "nik",
-      "clientId": "nik",
-      "clientSecret": "bat"
+      "name": "1_test",
+      "clientId": "1_test",
+      "clientSecret": "1_test"
     }
   }
 }

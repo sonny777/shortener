@@ -12,11 +12,13 @@ views.controller('registerCtrl', ['$scope', '$http', '$location', 'UserService',
     $scope.createUser = function() {
         UserService.createUser().success(function (data, status) {
             $scope.users = data;
+        }).error(function (data, status) {
+            $scope.registrationError = 'User already exists.';
         });
         ClientService.createClient().success(function (data, status) {
             $scope.clients = data;
+            $location.path('/login');
         });
-        $location.path('/login');
     };
     UserService.getUsers().success(function (data, status) {
         $scope.register = data;

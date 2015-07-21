@@ -1,39 +1,22 @@
-module.exports = function (grunt) {
-
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-
+module.exports = function(grunt){
     grunt.initConfig({
-        'meta': {
-            'jsFilesForTesting': [
-                'bower_components/jquery/jquery.js',
-                'bower_components/angular/angular.js',
-                'bower_components/angular-route/angular-route.js',
-                'bower_components/angular-sanitize/angular-sanitize.js',
-                'bower_components/angular-mocks/angular-mocks.js',
-                'bower_components/restangular/dist/restangular.js',
-                'bower_components/underscore/underscore.js',
-                'bower_components/underscore/underscore.js',
-                'test/**/*Spec.js'
-            ]
-        },
+        pkg: grunt.file.readJSON('package.json'),
 
-        'karma': {
-            'development': {
-                'configFile': 'karma.conf.js',
-                'options': {
-                    'files': [
-                        '<%= meta.jsFilesForTesting %>',
-                        'source/**/*.js'
-                    ],
-                }
+        mocha: {
+            all: {
+                src: ['test/testrunner.html']
+            },
+            options: {
+                run: true
             }
         },
+
         'jshint': {
-            'beforeconcat': ['*.js'],
+            'beforeconcat': ['*.js']
         }
     });
 
-    grunt.registerTask('test', ['karma:development']);
-
+    grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('default', ['mocha']);
 };

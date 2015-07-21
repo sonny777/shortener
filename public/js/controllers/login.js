@@ -10,6 +10,7 @@ views.config(['$stateProvider', function ($stateProvider) {
 
 views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'UserService', '$rootScope', '$localStorage', '$timeout',
     function ($scope, $http, $state, TokenService, UserService, $rootScope, $localStorage, $timeout) {
+        //need debug
         $rootScope.loggedIn = $localStorage.userId;
         $scope.getToken = function () {
             TokenService.getToken()
