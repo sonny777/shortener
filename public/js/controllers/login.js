@@ -21,7 +21,7 @@ views.controller('loginCtrl', ['$scope', '$http', '$state', 'TokenService', 'Use
                         $localStorage.userId = userId;
                         $rootScope.rootUserId = userId;
                     });
-                    $state.go('links');
+                    $state.go('urls');
                     $rootScope.loggedIn = data;
                 }).
                 error(function (data, status) {
