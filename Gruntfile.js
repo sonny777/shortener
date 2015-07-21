@@ -2,12 +2,13 @@ module.exports = function(grunt){
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        mocha: {
-            all: {
-                src: ['test/testrunner.html']
-            },
-            options: {
-                run: true
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'list',
+                    timeout: 15000
+                },
+                src: ['test/tests.js']
             }
         },
 
@@ -17,6 +18,7 @@ module.exports = function(grunt){
     });
 
     grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('default', ['mocha']);
+    grunt.registerTask('default', ['mochaTest']);
 };
