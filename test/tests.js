@@ -20,6 +20,7 @@ describe('Routing', function() {
                 });
         });
     });
+
     describe('Client', function() {
         it('Should return error trying to save duplicate client.', function(done) {
             var data = {
@@ -36,8 +37,9 @@ describe('Routing', function() {
                 });
         });
     });
+
     describe('Link', function() {
-        it('Should return the value by short link.', function(done) {
+        it('Should return the link by short value.', function(done) {
             var data = {
                 shortValue: config.get("default:link:shortValue")
             };
@@ -47,6 +49,67 @@ describe('Routing', function() {
                 .end(function(err, res) {
                     assert(res.status == 200);
                     expect(res.body.link.shortValue).to.equal(config.get("default:link:shortValue"));
+                    done();
+                });
+        });
+    });
+
+    describe('Link', function() {
+        it('Should return a list of links..', function(done) {
+            api.post('/api/links')
+                .expect(200)
+                .end(function(err, res) {
+                    assert(res.status == 200);
+                    done();
+                });
+        });
+    });
+
+    describe('Link', function() {
+        it('Should return the link by ID.', function(done) {
+            var data = {
+                urlId: "55ae4de14eaac2a01bed4480"
+            };
+            api.post('/api/links/byId')
+                .send(data)
+                .expect(200)
+                .end(function(err, res) {
+                    assert(res.status == 200);
+                    expect(res.body.link._id).to.equal("55ae4de14eaac2a01bed4480");
+                    done();
+                });
+        });
+    });
+
+    describe('User', function() {
+        it('Should return the user by ID.', function(done) {
+            var data = {
+                userId: "559fde5bff7c6a98130c9810"
+            };
+            api.post('/api/users/byId')
+                .send(data)
+                .expect(200)
+                .end(function(err, res) {
+                    assert(res.status == 200);
+                    expect(res.body.user._id).to.equal("559fde5bff7c6a98130c9810");
+                    expect(res.body.user.username).to.equal("nik");
+                    done();
+                });
+        });
+    });
+
+    describe('User', function() {
+        it('Should return the user by username.', function(done) {
+            var data = {
+                username: "nik"
+            };
+            api.post('/api/users/byName')
+                .send(data)
+                .expect(200)
+                .end(function(err, res) {
+                    assert(res.status == 200);
+                    expect(res.body.user._id).to.equal("559fde5bff7c6a98130c9810");
+                    expect(res.body.user.username).to.equal("nik");
                     done();
                 });
         });
